@@ -1,0 +1,18 @@
+<div class="login-screen-div">
+  <div class="main-container">
+    <!-- <img src="../../assets/images/logo_positivo.png" class="logo"> -->
+
+    <div class="bx--form-item">
+      <input #email id="input-email" type="text" [ngClass]="email.value == '' ? 'bx--text-input' : 'bx--text-input filled'" [(ngModel)]="loginUser">
+      <label for="input-email" class="bx--label">Digite seu usuário:</label>
+    </div>
+
+    <div class="bx--form-item">
+      <input (keyup.enter)="loginAuth(password.value, email.value)" #password id="input-password" type="password"
+         [ngClass]="password.value == '' ? 'bx--text-input' : 'bx--text-input filled'" placeholder="******"  (ngModel)="password" [(ngModel)]="passwordUser">
+      <label for="input-password" class="bx--label">Digite sua senha:</label>
+    </div>
+    <div *ngIf="errorMessage" class="bx--form-requirement">{{errorMessage}}</div>
+    <button (click)="loginAuth(password.value, email.value)" class="bx--btn bx--btn--primary">Entrar</button>
+  </div>
+</div>

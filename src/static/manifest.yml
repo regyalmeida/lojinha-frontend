@@ -1,4 +1,0 @@
-applications:
-- name: MVPJJ
-  random-route: false
-  buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
