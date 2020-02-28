@@ -1,1 +1,21 @@
-<p>home-screen works!</p>
+<app-nav-bar></app-nav-bar>
+
+<div>
+  <div>
+    <input type="file" (change)="createFormData($event)">
+  </div>
+  <button (click)="upload()">Upload</button>
+</div>
+
+<div>
+  <label>Recuperar produto</label>
+  <input type="text" (change)="getThisImage($event)">
+
+</div>
+
+<div >
+  <p>imagem recuperada</p>
+  <img src='https://lojinha.s3.us-south.cloud-object-storage.appdomain.cloud/zy12a.jpg'/>
+</div>
+
+<!-- 5e571f7d2d9781665f6062fd -->

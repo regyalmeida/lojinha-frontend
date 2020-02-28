@@ -1,0 +1,30 @@
+.users-screen-body{
+    .select-main-action {   
+        button {
+            border: none;
+            cursor: pointer;
+    
+            &:hover {
+                color: darken(#0277BD, 10%);
+        
+                svg g rect {
+                    fill: darken(#0277BD, 10%);
+                }
+            }
+        }
+    }
+    
+    .administrador-view{
+        background-color: red;
+    }
+    .estoquista-view{
+        background-color:pink ;
+    }
+    .cliente-view{
+        background-color: green;
+    }
+    .produto-view{
+        background-color:blue ;
+    }
+        
+}

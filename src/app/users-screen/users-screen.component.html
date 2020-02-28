@@ -1,0 +1,35 @@
+
+<app-nav-bar></app-nav-bar>
+
+<div class="users-screen-body">
+    <div class="select-main-action">
+        <button (click)="changeView('administrador')">Listar Usuários Administradores</button>
+        <button (click)="changeView('cliente')">Listar Usuários Clientes</button>
+        <button (click)="changeView('estoquista')">Listar Usuários Estoquistas</button>
+        <!-- <button (click)="changeView('produto')">Listar Produtos</button> -->
+    </div>
+    <div class="administrador-view" *ngIf="administrador">
+        <ul>
+            <li *ngFor="let user of recoveredUsers">
+                {{user.name}}
+                {{user.user}}
+                {{user.password}}
+            </li>
+
+        </ul>
+    </div>
+    <div class="estoquista-view" *ngIf="estoquista">
+        <li *ngFor="let user of recoveredUsers">
+            {{user.name}}
+            {{user.user}}
+            {{user.password}}
+        </li>
+    </div>
+    <div class="cliente-view" *ngIf="cliente">
+        <li *ngFor="let user of recoveredUsers">
+            {{user.name}}
+            {{user.user}}
+            {{user.password}}
+        </li>
+    </div>
+</div>

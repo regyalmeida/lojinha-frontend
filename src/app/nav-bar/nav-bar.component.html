@@ -1,0 +1,16 @@
+<header>
+    <div class="wrapper">
+        <div>
+            <a routerLink="/" routerLinkActive="selected">Lojinha</a>
+        </div>
+        <div class="align-center">
+            <div >
+                <a *ngIf="profile== 'administrador' " routerLink="/usuarios" routerLinkActive="selected">Gerenciar Usuários</a>
+            </div>
+            <div >
+                <a *ngIf="profile!== 'cliente' " routerLink="/produtos" routerLinkActive="selected">Gerenciar Produtos</a>
+            </div>
+        </div>
+    <button (click)="exit()">Sair</button>
+    </div>
+</header>

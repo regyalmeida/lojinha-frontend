@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -10,6 +10,7 @@ import { map } from 'rxjs/operators';
 export class AuthService {
 
   url: string = environment.baseUrl;
+  // url : string = 'http://localhost:6023/api'
 
   constructor(private http: HttpClient) { }
 
@@ -22,8 +23,13 @@ export class AuthService {
     return JSON.parse(window.localStorage.getItem('auth'));
   }
 
-  setAuth(obj) {
-    window.localStorage.setItem('auth', JSON.stringify(obj));
+  getProfile() {
+    return JSON.parse(window.localStorage.getItem('profile'));
+  }
+
+  setAuth(auth, profile) {
+    window.localStorage.setItem('auth', JSON.stringify(auth));
+    window.localStorage.setItem('profile', JSON.stringify(profile));
   }
 
   isLoggedIn() {
@@ -33,6 +39,17 @@ export class AuthService {
 
   getAllInfo(obj) {
     return this.http.post<any>(this.url + '/auth/login', obj)
+      .pipe(
+        map(response => {
+          console.log('service resposnse', response)
+          return response;
+        })
+      );
+  }
+
+  recoverUsers(profile){
+    return this.http.get<any>(this.url + '/auth/recover/users', 
+      {params: new HttpParams().set('profile', profile)})
       .pipe(
         map(response => {
           console.log('service resposnse', response)

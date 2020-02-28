@@ -42,7 +42,7 @@ export class LoginScreenComponent implements OnInit {
     this.authService.getAllInfo(params).subscribe((complete) => {
       console.log(complete)
       if (complete.autenticado) {
-        this.authService.setAuth({ user });
+        this.authService.setAuth({ user }, {profile: complete.data.profile});
         this.router.navigate(['/home']);
       }
     }, (err) => {
