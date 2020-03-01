@@ -14,11 +14,15 @@ import { HomeScreenComponent } from './home-screen/home-screen.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { UsersScreenComponent } from './users-screen/users-screen.component';
 import { ProdutsScreenComponent } from './produts-screen/produts-screen.component';
+import { RegisterUserComponent } from './login-screen/register-user/register-user.component';
+import { HomeProductComponent } from './home-screen/product/home-product.component';
 
 const appRoutes: Routes = [
   { path: '', component: LoginScreenComponent, },
+  { path: 'novo/usuario', component: RegisterUserComponent, canActivate: [] },
   { path: 'home', component: HomeScreenComponent, canActivate: [AppGuardGuard] },
-  { path: 'usuarios', component: UsersScreenComponent, canActivate: [AppGuardGuard] }
+  { path: 'gerenciar/usuarios', component: UsersScreenComponent, canActivate: [AppGuardGuard] },
+  { path: 'gerenciar/produtos', component: ProdutsScreenComponent, canActivate: [AppGuardGuard] }
 ];
 
 @NgModule({
@@ -28,7 +32,9 @@ const appRoutes: Routes = [
     HomeScreenComponent,
     NavBarComponent,
     UsersScreenComponent,
-    ProdutsScreenComponent
+    ProdutsScreenComponent,
+    RegisterUserComponent,
+    HomeProductComponent,
   ],
   imports: [
     BrowserModule,

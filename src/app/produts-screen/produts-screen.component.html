@@ -1,1 +1,36 @@
-<p>produts-screen works!</p>
+<app-nav-bar> </app-nav-bar>
+
+<div>
+
+  <button (click)="registerNewProduct()">Criar novo produto</button>
+
+  <div *ngIf='create'>
+    <!-- <div>
+      <label>Recuperar produto</label>
+      <input type="text" (change)="getThisImage($event)">
+    </div> -->
+
+    <div>
+      <input type="file" (change)="createFormData($event)">
+    </div>
+    <button (click)="upload()">Upload</button>
+  </div>
+  
+  <div *ngIf='updateDelete'>
+    <div class="one-product">
+      <div class="product-image" >
+          <img [src]=product.imagePath />
+      </div>
+      <div class="product-details">
+          <p>{{product.name}}</p>
+          <p>{{product.description}}</p>
+      </div>
+  </div>
+  </div>
+  
+  
+  <div *ngIf='imageExists'>
+    <p>imagem recuperada</p>
+    <img [src]=link />
+  </div>
+</div>

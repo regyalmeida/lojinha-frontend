@@ -50,4 +50,8 @@ export class LoginScreenComponent implements OnInit {
       this.errorMessage = "Login inválido, verifique os campos!";
     });
   }
+
+  registerNewUser(){
+    this.router.navigate(['/novo/usuario']);
+  }
 }
