@@ -15,20 +15,24 @@
     </div>
     <button (click)="upload()">Upload</button>
   </div>
-  
+
   <div *ngIf='updateDelete'>
     <div class="one-product">
-      <div class="product-image" >
-          <img [src]=product.imagePath />
+      <div class="product-image">
+        <img [src]=product.imagePath />
       </div>
       <div class="product-details">
-          <p>{{product.name}}</p>
-          <p>{{product.description}}</p>
+        <p>{{product.name}}</p>
+        <p>{{product.description}}</p>
       </div>
+      <div> 
+        <button (click)="deleteProduct()">Apagar produto</button>
+        <button (click)="updateProduct()">Atualizar produto</button>
+      </div>
+    </div>
   </div>
-  </div>
-  
-  
+
+
   <div *ngIf='imageExists'>
     <p>imagem recuperada</p>
     <img [src]=link />

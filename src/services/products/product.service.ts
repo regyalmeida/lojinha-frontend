@@ -51,13 +51,33 @@ export class ProductService {
   }
 
   registerNewProduct(productInfo) {
-    return this.http.post<any>('http://localhost:6023/api/product/register', productInfo)
+    return this.http.post<any>(this.url + '/product/register', productInfo)
       .pipe(
         map(response => {
           console.log('service resposnse', response)
           return response;
         })
       );
+  }
+
+  deleteProduct(product){
+    return this.http.put<any>(this.url + '/product/delete', product)
+    .pipe(
+      map(response => {
+        console.log('service resposnse', response)
+        return response;
+      })
+    );
+  }
+
+  updateProduct(product){
+    return this.http.put<any>(this.url + '/product/update', product)
+    .pipe(
+      map(response => {
+        console.log('service resposnse', response)
+        return response;
+      })
+    );
   }
 
   getAllInfo(obj) {

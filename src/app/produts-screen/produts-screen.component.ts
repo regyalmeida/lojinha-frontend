@@ -74,4 +74,12 @@ export class ProdutsScreenComponent implements OnInit {
     this.updateDelete = false
   }
 
+  deleteProduct(){
+    this.product['flag'] = 'inative'
+    this.productInfo = this.productService.deleteProduct(this.product).subscribe(response => {
+      console.log('response do delete', response)
+
+    })
+  }
+
 }
