@@ -33,7 +33,7 @@
                                     <td *ngIf="ticket.status == 3">Fechado</td> -->
                     <td width=275>
                         <a class="btn btn-info" (click)="openProductDetails(product)">Detalhes</a>
-                        <!-- <a class="btn btn-success" routerLink="/edit/{{ticket.id}}">Editar</a>  -->
+                        <a class="btn btn-warning"  (click)="openUpdateProduct(product)">Atualizar</a> 
                         <a class="btn btn-danger" *ngIf="(profile == 'administrador') && (product.flag == 'active')" (click)="inactiveProduct(product)">Inativar</a>
                         <a class="btn btn-success" *ngIf="(profile == 'administrador') && (product.flag == 'inative')" (click)="activeProduct(product)">Ativar</a>
                     </td>

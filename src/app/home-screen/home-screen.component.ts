@@ -52,6 +52,14 @@ export class HomeScreenComponent implements OnInit {
     this.oneProduct['imagePath'] = this.imagePath.changingThisBreaksApplicationSecurity
     this.router.navigate(['/gerenciar/produtos'], {state: {data: this.oneProduct}});
   }
+
+  openUpdateProduct(product){
+    console.log('---openUpdateProduct---',product)
+    this.oneProduct = product
+    this.getImagePath(this.oneProduct)
+    this.oneProduct['imagePath'] = this.imagePath.changingThisBreaksApplicationSecurity
+    this.router.navigate(['/gerenciar/produtos'], {state: {data: this.oneProduct, update: true}});
+  }
   
   inactiveProduct(product) {
     this.productService.inactiveProduct(product).subscribe(response => {

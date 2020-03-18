@@ -63,6 +63,9 @@ export class ProdutsScreenComponent implements OnInit {
       console.log(this.product)
       this.showProduct = !this.showProduct
     }
+    if(history.state.update) {
+      this.updateProduct()
+    }
   }
 
   createFormData(event) {
@@ -158,5 +161,5 @@ export class ProdutsScreenComponent implements OnInit {
       console.log('response do delete', response)
     })
   }
-  
+
 }
