@@ -25,6 +25,7 @@
     "angular-resize-event": "^1.2.1",
     "angular-user-idle": "^2.2.1",
     "bn-ng-idle": "^1.0.1",
+    "bootstrap": "^4.4.1",
     "http-server": "^0.12.1",
     "ng-starrating": "^1.0.11",
     "ngx-cookie-service": "^2.3.0",

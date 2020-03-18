@@ -1,22 +1,10 @@
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <app-nav-bar> </app-nav-bar>
 
 <div>
-
-  <button (click)="registerNewProduct()">Criar novo produto</button>
-
-  <div *ngIf='create'>
-    <!-- <div>
-      <label>Recuperar produto</label>
-      <input type="text" (change)="getThisImage($event)">
-    </div> -->
-
-    <div>
-      <input type="file" (change)="createFormData($event)">
-    </div>
-    <button (click)="upload()">Upload</button>
-  </div>
-
-  <div *ngIf='updateDelete'>
+  <div *ngIf='showProduct'>
     <div class="one-product">
       <div class="product-image">
         <img [src]=product.imagePath />
@@ -25,16 +13,89 @@
         <p>{{product.name}}</p>
         <p>{{product.description}}</p>
       </div>
-      <div> 
+      <div *ngIf="profile !== 'cliente' ">
         <button (click)="deleteProduct()">Apagar produto</button>
         <button (click)="updateProduct()">Atualizar produto</button>
       </div>
     </div>
   </div>
+</div>
 
 
-  <div *ngIf='imageExists'>
-    <p>imagem recuperada</p>
-    <img [src]=link />
+<button *ngIf="profile == 'administrador' " (click)="registerNewProduct()">Criar novo produto</button>
+
+<div *ngIf='create'>
+  <div class="col-md-6 offset-md-3 mt-5">
+    <h1>Cadastro de Produto</h1>
+    <form>
+      <div class="form-group">
+        <label for="exampleInputName">Nome: </label>
+        <input type="text" name="name" class="form-control" id="name" placeholder="nome do prod" required="required"
+          [(ngModel)]='name'>
+      </div>
+      <div class="form-group">
+        <label for="price" required="required">Preço:</label>
+        <input type="price" name="price" class="form-control" id="price" aria-describedby="preco do prod"
+          placeholder="preco" [(ngModel)]='price'>
+      </div>
+      <div class="form-group">
+        <label for="description" required="required">Descrição:</label>
+        <input type="description" name="description" class="form-control" id="description"
+          aria-describedby="descricao do prod" placeholder="descri" [(ngModel)]='description'>
+      </div>
+      <div class="form-group">
+        <label for="quantity" required="required">Quantidade:</label>
+        <input type="quantity" name="quantity" class="form-control" id="quantity"
+          aria-describedby="quantidade em estoque" placeholder="qtd" [(ngModel)]='quantity'>
+      </div>
+      <div class="form-group">
+        <label for="category" required="required">Categoria:</label>
+        <input type="category" name="category" class="form-control" id="category"
+          aria-describedby="quantidade em estoque" placeholder="qtd" [(ngModel)]='category'>
+      </div>
+      <div class="form-group mt-3">
+        <label class="mr-2">Upload foto do produto:</label>
+        <input type="file" (change)="createFormData($event)">
+
+        <button (click)="upload()">Upload</button>
+      </div>
+    </form>
   </div>
 </div>
+
+
+<div *ngIf='update'>
+  <div class="col-md-6 offset-md-3 mt-5">
+    <h1>Atualização do Produto</h1>
+    <form>
+      <div class="form-group">
+        <label for="updatedName">Nome: </label>
+        <input type="text" name="updatedName" class="form-control" id="updatedName"  required="required" [(ngModel)]='updatedName'>
+      </div>
+      <div class="form-group">
+        <label for="updatedPrice" required="required">Preço:</label>
+        <input type="updatedPrice" name="updatedPrice" class="form-control" id="updatedPrice" [(ngModel)]='updatedPrice'>
+      </div>
+      <div class="form-group">
+        <label for="updatedDescription" required="required">Descrição:</label>
+        <input type="updatedDescription" name="updatedDescription" class="form-control" id="description"[(ngModel)]='updatedDescription'>
+      </div>
+      <div class="form-group">
+        <label for="updatedQuantity" required="required">Quantidade:</label>
+        <input type="quantity" name="updatedQuantity" class="form-control" id="updatedQuantity" [(ngModel)]='updatedQuantity'>
+      </div>
+      <div class="form-group">
+        <label for="updatedCategory" required="required">Categoria:</label>
+        <input type="category" name="updatedCategory" class="form-control" id="updatedCategory" [(ngModel)]='updatedCategory'>
+      </div>
+      <!-- <div class="form-group mt-3"> 
+        <label class="mr-2">Upload foto do produto:</label>
+        <input type="file" (change)="createUpdateFormData($event)">  -->
+
+        <button (click)="sendUpdate()">Atualizar produto</button>
+      <!-- </div> -->
+    </form>
+  </div>
+</div>
+
+<app-faq></app-faq>

@@ -9,7 +9,7 @@ import { map, tap } from 'rxjs/operators';
 })
 export class ProductService {
 
-  url: string = environment.baseUrl;
+  url: string = environment.localUrl;
   // url : string = 'http://localhost:6023/api'
 
   constructor(private http: HttpClient) { }
@@ -31,6 +31,16 @@ export class ProductService {
 
   getAllProducts() {
     return this.http.get<any>(this.url + '/product/recover')
+      .pipe(
+        map(response => {
+          console.log('service resposnse', response)
+          return response
+        })
+      )
+  }
+
+  getAllActiveProducts() {
+    return this.http.get<any>(this.url + '/product/recover/active')
       .pipe(
         map(response => {
           console.log('service resposnse', response)
@@ -61,7 +71,27 @@ export class ProductService {
   }
 
   deleteProduct(product){
-    return this.http.put<any>(this.url + '/product/delete', product)
+    return this.http.put<any>(this.url + '/product/inactive', product)
+    .pipe(
+      map(response => {
+        console.log('service resposnse', response)
+        return response;
+      })
+    );
+  }
+
+  inactiveProduct(product){
+    return this.http.put<any>(this.url + '/product/inactive', product)
+    .pipe(
+      map(response => {
+        console.log('service resposnse', response)
+        return response;
+      })
+    );
+  }
+
+  activeProduct(product){
+    return this.http.put<any>(this.url + '/product/active', product)
     .pipe(
       map(response => {
         console.log('service resposnse', response)

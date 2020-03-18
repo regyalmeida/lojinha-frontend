@@ -1,0 +1,7 @@
+<div>
+    <h1>Perguntas mais frequentes</h1>
+    <div *ngFor="let question of questions; let i = index ">
+        <p>{{i+1}})  {{question.question}}</p>
+        <p>{{question.answer}}</p>
+    </div>
+</div>>

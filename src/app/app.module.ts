@@ -16,6 +16,7 @@ import { UsersScreenComponent } from './users-screen/users-screen.component';
 import { ProdutsScreenComponent } from './produts-screen/produts-screen.component';
 import { RegisterUserComponent } from './login-screen/register-user/register-user.component';
 import { HomeProductComponent } from './home-screen/product/home-product.component';
+import { FaqComponent } from './faq/faq.component';
 
 const appRoutes: Routes = [
   { path: '', component: LoginScreenComponent, },
@@ -35,6 +36,7 @@ const appRoutes: Routes = [
     ProdutsScreenComponent,
     RegisterUserComponent,
     HomeProductComponent,
+    FaqComponent,
   ],
   imports: [
     BrowserModule,

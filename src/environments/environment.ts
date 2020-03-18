@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://backend-lojinha.mybluemix.net/api'
+  baseUrl: 'https://backend-lojinha.mybluemix.net/api',
+  localUrl: 'http://localhost:6023/api'
 };
 
 /*
