@@ -1,45 +1,45 @@
 <app-nav-bar></app-nav-bar>
 
 <div *ngIf="profile == 'cliente' ">
-        <div class='all-products' *ngFor='let product of products'>
-                <app-product [product]='product' (productCallback)="openProductDetails($event.product)"> </app-product>
-        </div>
+    <div class='all-products' *ngFor='let product of products'>
+        <app-product [product]='product' (productCallback)="openProductDetails($event.product)"> </app-product>
+    </div>
 </div>
 
-<div *ngIf="profile != 'cliente'">
+<div *ngIf=" (profile != 'cliente')  ">
         <table class="table table-bordered">
-                <thead>
-                        <tr>
-                                <td>ID</td>
-                                <td>Nome</td>
-                                <td>Quantidade</td>
-                                <td>Preço</td>
-                                <td>Categoria</td>
-                                <td>Status</td>
-                                <td>Ações</td>
-                        </tr>
-                </thead>
-                <tbody>
-                        <tr *ngFor="let product of products">
-                                <td>{{product._id}}</td>
-                                <td>{{product.name}}</td>
-                                <td>{{product.quantity}}</td>
-                                <td>{{product.price}}</td>
-                                <td>{{product.category}}</td>
-                                <td>{{product.flag}}</td>
-
-                                <!-- <td *ngIf="ticket.status == 1">Aberto</td>
-                                <td *ngIf="ticket.status == 2">Em Andamento</td>
-                                <td *ngIf="ticket.status == 3">Fechado</td> -->
-                                <td width=275>
-                                        <a class="btn btn-info" (click)="openProductDetails(product)">Detalhes</a>
-                                        <!-- <a class="btn btn-success" routerLink="/edit/{{ticket.id}}">Editar</a>  -->
-                                        <a class="btn btn-danger" (click)="inactiveProduct(product)">Inativar</a>
-                                        <a class="btn btn-success" (click)="activeProduct(product)">Ativar</a>
-                                </td> 
-                        </tr>
-
-                </tbody>
-
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Nome</td>
+                    <td>Quantidade</td>
+                    <td>Preço</td>
+                    <td>Categoria</td>
+                    <td>Status</td>
+                    <td>Ações</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of products">
+                    <td>{{product._id}}</td>
+                    <td>{{product.name}}</td>
+                    <td>{{product.quantity}}</td>
+                    <td>{{product.price}}</td>
+                    <td>{{product.category}}</td>
+                    <td>{{product.flag}}</td>
+    
+                    <!-- <td *ngIf="ticket.status == 1">Aberto</td>
+                                    <td *ngIf="ticket.status == 2">Em Andamento</td>
+                                    <td *ngIf="ticket.status == 3">Fechado</td> -->
+                    <td width=275>
+                        <a class="btn btn-info" (click)="openProductDetails(product)">Detalhes</a>
+                        <!-- <a class="btn btn-success" routerLink="/edit/{{ticket.id}}">Editar</a>  -->
+                        <a class="btn btn-danger" *ngIf="(profile == 'administrador') && (product.flag == 'active')" (click)="inactiveProduct(product)">Inativar</a>
+                        <a class="btn btn-success" *ngIf="(profile == 'administrador') && (product.flag == 'inative')" (click)="activeProduct(product)">Ativar</a>
+                    </td>
+                </tr>
+    
+            </tbody>
+    
         </table>
-</div>
+    </div>

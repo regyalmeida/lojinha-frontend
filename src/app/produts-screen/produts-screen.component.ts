@@ -145,4 +145,18 @@ export class ProdutsScreenComponent implements OnInit {
     console.log(this.updatedName)
   }
 
+
+  inactiveProduct(product) {
+    this.productService.inactiveProduct(product).subscribe(response => {
+      console.log('response do delete', response)
+    })
+  }
+
+  activeProduct(product) {
+    console.log(product)
+    this.productService.activeProduct(product).subscribe(response => {
+      console.log('response do delete', response)
+    })
+  }
+  
 }
