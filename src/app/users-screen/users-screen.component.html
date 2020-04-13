@@ -1,35 +1,122 @@
 
 <app-nav-bar></app-nav-bar>
 
-<div class="users-screen-body">
-    <div class="select-main-action">
-        <button (click)="changeView('administrador')">Listar Usuários Administradores</button>
-        <button (click)="changeView('cliente')">Listar Usuários Clientes</button>
-        <button (click)="changeView('estoquista')">Listar Usuários Estoquistas</button>
-        <!-- <button (click)="changeView('produto')">Listar Produtos</button> -->
+<div *ngIf=" userProfile == 'administrador' "> 
+    <div class="users-screen-body">
+        <div class="select-main-action">
+            <button (click)="changeView('administradorView')">Listar Usuários Administradores</button>
+            <button (click)="changeView('clienteView')">Listar Usuários Clientes</button>
+            <button (click)="changeView('estoquistaView')">Listar Usuários Estoquistas</button>
+            <!-- <button (click)="changeView('produto')">Listar Produtos</button> -->
+        </div>
+        <div *ngIf="administradorView">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>Nome</td>
+                        <td>User</td>
+                        <td>Password</td>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of recoveredUsers">
+                        <td>{{user._id}}</td>
+                        <td>{{user.name}}</td>
+                        <td>{{user.user}}</td>
+                        <td>{{user.password}}</td>
+                       
+        
+                        <!-- <td *ngIf="ticket.status == 1">Aberto</td>
+                                        <td *ngIf="ticket.status == 2">Em Andamento</td>
+                                        <td *ngIf="ticket.status == 3">Fechado</td> -->
+                        <td width=275>
+                            <a class="btn btn-danger" (click)="deleteUser(user)">Deletar</a>
+                            <!-- <a class="btn btn-warning"  (click)="openUpdateProduct(product)">Atualizar</a>  -->
+                            <!-- <a class="btn btn-danger" *ngIf="(profile == 'administrator') && (product.flag == 'active')" (click)="inactiveProduct(product)">Inativar</a>
+                            <a class="btn btn-success" *ngIf="(profile == 'administrator') && (product.flag == 'inative')" (click)="activeProduct(product)">Ativar</a> -->
+                        </td>
+                    </tr>
+        
+                </tbody>
+        
+            </table>
+        </div>
+        <div *ngIf="estoquistaView">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>Nome</td>
+                        <td>User</td>
+                        <td>Password</td>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of recoveredUsers">
+                        <td>{{user._id}}</td>
+                        <td>{{user.name}}</td>
+                        <td>{{user.user}}</td>
+                        <td>{{user.password}}</td>
+                       
+        
+                        <!-- <td *ngIf="ticket.status == 1">Aberto</td>
+                                        <td *ngIf="ticket.status == 2">Em Andamento</td>
+                                        <td *ngIf="ticket.status == 3">Fechado</td> -->
+                        <td width=275>
+                            <a class="btn btn-danger" (click)="deleteUser(user)">Deletar</a>
+                            <!-- <a class="btn btn-warning"  (click)="openUpdateProduct(product)">Atualizar</a>  -->
+                            <!-- <a class="btn btn-danger" *ngIf="(profile == 'administrator') && (product.flag == 'active')" (click)="inactiveProduct(product)">Inativar</a>
+                            <a class="btn btn-success" *ngIf="(profile == 'administrator') && (product.flag == 'inative')" (click)="activeProduct(product)">Ativar</a> -->
+                        </td>
+                    </tr>
+        
+                </tbody>
+        
+            </table>
+        </div>
+        <div *ngIf="clienteView">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>Nome</td>
+                        <td>User</td>
+                        <td>Password</td>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of recoveredUsers">
+                        <td>{{user._id}}</td>
+                        <td>{{user.name}}</td>
+                        <td>{{user.user}}</td>
+                        <td>{{user.password}}</td>
+                       
+        
+                        <!-- <td *ngIf="ticket.status == 1">Aberto</td>
+                                        <td *ngIf="ticket.status == 2">Em Andamento</td>
+                                        <td *ngIf="ticket.status == 3">Fechado</td> -->
+                        <td width=275>
+                            <a class="btn btn-danger" (click)="deleteUser(user._id)">Deletar</a>
+                            <!-- <a class="btn btn-warning"  (click)="openUpdateProduct(product)">Atualizar</a>  -->
+                            <!-- <a class="btn btn-danger" *ngIf="(profile == 'administrator') && (product.flag == 'active')" (click)="inactiveProduct(product)">Inativar</a>
+                            <a class="btn btn-success" *ngIf="(profile == 'administrator') && (product.flag == 'inative')" (click)="activeProduct(product)">Ativar</a> -->
+                        </td>
+                    </tr>
+        
+                </tbody>
+        
+            </table>
+        </div>
+       
     </div>
-    <div class="administrador-view" *ngIf="administrador">
-        <ul>
-            <li *ngFor="let user of recoveredUsers">
-                {{user.name}}
-                {{user.user}}
-                {{user.password}}
-            </li>
+    <button (click)="registerNewUser()" class="bx--btn bx--btn--secondary">Criar novo usuário</button>
 
-        </ul>
-    </div>
-    <div class="estoquista-view" *ngIf="estoquista">
-        <li *ngFor="let user of recoveredUsers">
-            {{user.name}}
-            {{user.user}}
-            {{user.password}}
-        </li>
-    </div>
-    <div class="cliente-view" *ngIf="cliente">
-        <li *ngFor="let user of recoveredUsers">
-            {{user.name}}
-            {{user.user}}
-            {{user.password}}
-        </li>
-    </div>
+</div>    
+
+<div *ngIf=" userProfile == 'cliente' " >
+    <p> Sou cliente</p>
 </div>

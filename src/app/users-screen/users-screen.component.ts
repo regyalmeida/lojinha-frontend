@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/authentication/auth.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-users-screen',
@@ -10,56 +12,75 @@ export class UsersScreenComponent implements OnInit {
 
   profile: string
 
-  administrador: boolean = false
-  cliente: boolean = false
-  estoquista: boolean = false
+  administradorView: boolean = false
+  clienteView: boolean = false
+  estoquistaView: boolean = false
   produto: boolean = false
-
   recoveredUsers: any
+  userProfile
+  user:any
 
-  constructor(private authService: AuthService) { }
-
+  constructor(private authService: AuthService,private router: Router) { 
+  }
+  
   ngOnInit() {
+    const objLogin = this.authService.getProfile();
+    this.userProfile = objLogin.profile;
+    console.log(this.userProfile)
+    console.log(objLogin)
     
   }
 
   changeView(view) {
     console.log(view)
-    if(view == 'administrador'){
-      this.administrador = true
-      this.cliente = false
-      this.estoquista = false
+    if(view == 'administradorView'){
+      this.administradorView = true
+      this.clienteView = false
+      this.estoquistaView = false
       this.produto = false
     }
-    else if(view == 'cliente'){
-      this.administrador = false
-      this.cliente = true
-      this.estoquista = false
+    else if(view == 'clienteView'){
+      this.administradorView = false
+      this.clienteView = true
+      this.estoquistaView = false
       this.produto = false
     } 
-    else if(view == 'estoquista'){
-      this.administrador = false
-      this.cliente = false
-      this.estoquista = true
+    else if(view == 'estoquistaView'){
+      this.administradorView = false
+      this.clienteView = false
+      this.estoquistaView = true
       this.produto = false
     }
     else {
-      this.administrador = false
-      this.cliente = false
-      this.estoquista = false
+      this.administradorView = false
+      this.clienteView = false
+      this.estoquistaView = false
       this.produto = true
     }
     this.recover(view)
   }
+  
 
   recover(params){
+    if(params == 'administradorView') params = "administrador"
+    else if(params == 'estoquistaView') params = "estoquista"
+    else params = "cliente"
     this.authService.recoverUsers(params).subscribe((complete) => {
-      
       this.recoveredUsers = complete.data
       console.log(this.recoveredUsers)
     }, (err) => {
       console.log(err)      
     });
   }
+  deleteUser(user) {
+    this.authService.deleteUser(user).subscribe(response => {
+      console.log('response do delete', response)
+
+    })
+  }
+  registerNewUser(){
+    this.router.navigate(['/novo/usuario']);
+  }
+
 
 }

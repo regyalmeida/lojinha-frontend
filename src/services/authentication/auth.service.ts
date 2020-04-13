@@ -4,13 +4,15 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  url: string = environment.baseUrl;
-  // url : string = 'http://localhost:6023/api'
+  // url: string = environment.localUrl;
+  url : string = 'http://localhost:6023/api'
+  // url : string = 'http://localhost:6002/api'
 
   constructor(private http: HttpClient) { }
 
@@ -57,5 +59,27 @@ export class AuthService {
         })
       );
   }
+
+  registerNewUser(userInfo) {
+    return this.http.post<any>(this.url + '/auth/register/user', userInfo)
+      .pipe(
+        map(response => {
+          console.log('service resposnse, TO AQUI', response)
+          return response;
+        })
+      );
+  }
+
+  deleteUser(id){
+    return this.http.delete<any>(this.url + '/auth/delete/user', id)
+    .pipe(
+      map(response => {
+        console.log('service resposnse', response)
+        return response;
+      })
+    );
+  }
+
+
 
 }

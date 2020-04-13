@@ -11,6 +11,9 @@
                 <a *ngIf="profile !== 'cliente' " routerLink="/gerenciar/produtos" routerLinkActive="selected">Gerenciar Produtos</a>
             </div>
         </div>
+        <div *ngIf="userName">
+            <a *ngIf="profile == 'cliente' " routerLink="/gerenciar/usuarios" routerLinkActive="selected">Olá {{userName}}</a>
+        </div>
     <button (click)="exit()">Sair</button>
     </div>
 </header>

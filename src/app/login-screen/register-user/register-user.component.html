@@ -1,1 +1,39 @@
-<p>register-user works!</p>
+
+<div class="jumbotron text-center">
+  <h1>Registrar</h1>
+</div>
+  
+
+
+  <div class="exporter-information">
+    <form class="form-horizontal needs-validation" novalidate [formGroup]="registerForm">
+        <div class="form-group">
+            <!-- <div class="col-sm-6">
+                <label for="cpf" class="control-label required">CPF*</label>
+                <input type="text" class="form-control" id="cpf" formControlName="cpf">
+            </div>       -->
+            <div class="col-sm-6">
+                <label for="profile" class="control-label required">Perfil*</label>
+                <input type="text" class="form-control" id="profile" formControlName="profile">
+            </div>
+            <div class="col-sm-6">
+                <label for="name" class="control-label required">Nome*</label>
+                <input type="text" class="form-control" id="name" formControlName="name">
+            </div>
+            <div class="col-sm-6">
+                <label for="user" class="control-label required">Nome de usuário</label>
+                <input type="text" class="form-control" id="user" formControlName="user">
+            </div>
+            <div class="col-sm-6">
+                <label for="password" class="control-label required">Senha</label>
+                <input type="text" class="form-control" id="password" formControlName="password">
+            </div>
+
+
+      
+        </div>
+
+    </form>
+    <button type="button" (click)="createUser()" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+</div>
+
