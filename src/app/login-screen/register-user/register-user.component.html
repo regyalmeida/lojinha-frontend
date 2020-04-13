@@ -1,32 +1,132 @@
 
+    <app-nav-bar  *ngIf="objLogin"> </app-nav-bar>
+
+
 <div class="jumbotron text-center">
   <h1>Registrar</h1>
 </div>
   
-
-
   <div class="exporter-information">
     <form class="form-horizontal needs-validation" novalidate [formGroup]="registerForm">
         <div class="form-group">
-            <!-- <div class="col-sm-6">
-                <label for="cpf" class="control-label required">CPF*</label>
-                <input type="text" class="form-control" id="cpf" formControlName="cpf">
-            </div>       -->
-            <div class="col-sm-6">
+            <div *ngIf="objLogin" class="col-sm-6">
                 <label for="profile" class="control-label required">Perfil*</label>
                 <input type="text" class="form-control" id="profile" formControlName="profile">
             </div>
-            <div class="col-sm-6">
-                <label for="name" class="control-label required">Nome*</label>
-                <input type="text" class="form-control" id="name" formControlName="name">
-            </div>
-            <div class="col-sm-6">
-                <label for="user" class="control-label required">Nome de usuário</label>
-                <input type="text" class="form-control" id="user" formControlName="user">
-            </div>
-            <div class="col-sm-6">
-                <label for="password" class="control-label required">Senha</label>
-                <input type="text" class="form-control" id="password" formControlName="password">
+            <div *ngIf="(profileType == 'cliente' || profileType == 'estoquista' || profileType == 'administrador') "> 
+
+                <div *ngIf="profileType == 'cliente' "  class="col-sm-6">
+                    <label for="cpf" class="control-label required">CPF*</label>
+                    <input type="text" class="form-control" id="cpf" formControlName="cpf">
+                </div>  
+                <div *ngIf="profileType == 'cliente' "  class="col-sm-6">
+                    <label for="email" class="control-label required">email*</label>
+                    <input type="text" class="form-control" id="email" formControlName="email">
+                </div>      
+                <div class="col-sm-6">
+                    <label for="name" class="control-label required">Nome*</label>
+                    <input type="text" class="form-control" id="name" formControlName="name">
+                </div>
+                <div class="col-sm-6">
+                    <label for="user" class="control-label required">Nome de usuário</label>
+                    <input type="text" class="form-control" id="user" formControlName="user">
+                </div>
+                <div class="col-sm-6">
+                    <label for="password" class="control-label required">Senha</label>
+                    <input type="text" class="form-control" id="password" formControlName="password">
+                </div>
+
+                <div class="addressForm"> 
+                    <div>
+                        <h2> Endereço de cobrança</h2>
+                        <form class="form-address needs-validation" novalidate formGroupName="billingAddress">
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label for="cep" class="control-label required">CEP*</label>
+                                    <input type="text" class="form-control" id="cep" formControlName="cep">
+                                    <span *ngIf="!cepIsValid"> CEP inválido</span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="street" class="control-label required">Endereço*</label>
+                                    <input type="text" class="form-control" id="street" formControlName="street">
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="streetNumber" class="control-label required">Número*</label>
+                                    <input type="number" class="form-control" id="streetNumber" formControlName="streetNumber">
+                                </div>                     
+                                <div class="col-sm-6">
+                                    <label for="neighborhood" class="control-label required">Bairro*</label>
+                                    <input type="text" class="form-control" id="neighborhood" formControlName="neighborhood">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="city" class="control-label required">Cidade*</label>
+                                    <input type="text" class="form-control" id="city" formControlName="city">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="state" class="control-label required">Estado*</label>
+                                    <input type="text" class="form-control" id="state" formControlName="state">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="country" class="control-label required">País*</label>
+                                    <input type="text" class="form-control" id="country" formControlName="country">
+                                </div>
+                        
+                            </div>
+                        
+                        </form>
+
+                        <h2>Deseja utilizar o mesmo endereço para envio?</h2>
+                        <div class="form-check form-check-inline">
+                            <input (click)="getCheckboxValue($event)" class="form-check-input" type="radio" id="inlineCheckbox1" value="sim">
+                            <label class="form-check-label" for="inlineCheckbox1">Sim</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input (click)="getCheckboxValue($event)" class="form-check-input" type="radio" id="inlineCheckbox2" value="nao">
+                            <label class="form-check-label" for="inlineCheckbox2">Não</label>
+                          </div>
+                    </div>
+
+                    <div *ngIf='selectedMaillingType'>
+                        <h2> Endereço de entrega</h2>
+                        <form class="form-address needs-validation" novalidate formGroupName="maillingAddress">
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label for="cep" class="control-label required">CEP*</label>
+                                    <input type="text" class="form-control" id="cep" formControlName="cep">
+                                    <span *ngIf="!cepIsValid"> CEP inválido</span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="street" class="control-label required">Endereço*</label>
+                                    <input type="text" class="form-control" id="street" formControlName="street">
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="streetNumber" class="control-label required">Número*</label>
+                                    <input type="number" class="form-control" id="streetNumber" formControlName="streetNumber">
+                                </div>                     
+                                <div class="col-sm-6">
+                                    <label for="neighborhood" class="control-label required">Bairro*</label>
+                                    <input type="text" class="form-control" id="neighborhood" formControlName="neighborhood">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="city" class="control-label required">Cidade*</label>
+                                    <input type="text" class="form-control" id="city" formControlName="city">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="state" class="control-label required">Estado*</label>
+                                    <input type="text" class="form-control" id="state" formControlName="state">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="country" class="control-label required">País*</label>
+                                    <input type="text" class="form-control" id="country" formControlName="country">
+                                </div>
+                        
+                            </div>
+                        
+                        </form>
+                    </div>
+
+                </div>
+
             </div>
 
 
