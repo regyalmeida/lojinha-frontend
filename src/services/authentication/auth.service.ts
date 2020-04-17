@@ -70,6 +70,17 @@ export class AuthService {
       );
   }
 
+  recoverOneUser(username) {
+    return this.http.get<any>(this.url + '/auth/recover/user', 
+    {params: new HttpParams().set('username', username)})
+    .pipe(
+      map(response => {
+        console.log('service resposnse', response)
+        return response;
+      })
+    );
+  }
+
   deleteUser(id){
     return this.http.delete<any>(this.url + '/auth/delete/user', id)
     .pipe(
@@ -81,5 +92,14 @@ export class AuthService {
   }
 
 
+  updateUser(payload){
+    return this.http.put<any>(this.url + '/auth/update/user', payload)
+    .pipe(
+      map(response => {
+        console.log('service resposnse', response)
+        return response;
+      })
+    );
+  }
 
 }

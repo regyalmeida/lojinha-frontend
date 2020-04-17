@@ -1,7 +1,6 @@
-
 <app-nav-bar></app-nav-bar>
 
-<div *ngIf=" userProfile == 'administrador' "> 
+<div *ngIf=" userProfile == 'administrador' ">
     <div class="users-screen-body">
         <div class="select-main-action">
             <button (click)="changeView('administradorView')">Listar Usuários Administradores</button>
@@ -17,7 +16,7 @@
                         <td>Nome</td>
                         <td>User</td>
                         <td>Password</td>
-                        
+
                     </tr>
                 </thead>
                 <tbody>
@@ -26,8 +25,8 @@
                         <td>{{user.name}}</td>
                         <td>{{user.user}}</td>
                         <td>{{user.password}}</td>
-                       
-        
+
+
                         <!-- <td *ngIf="ticket.status == 1">Aberto</td>
                                         <td *ngIf="ticket.status == 2">Em Andamento</td>
                                         <td *ngIf="ticket.status == 3">Fechado</td> -->
@@ -38,9 +37,9 @@
                             <a class="btn btn-success" *ngIf="(profile == 'administrator') && (product.flag == 'inative')" (click)="activeProduct(product)">Ativar</a> -->
                         </td>
                     </tr>
-        
+
                 </tbody>
-        
+
             </table>
         </div>
         <div *ngIf="estoquistaView">
@@ -51,7 +50,7 @@
                         <td>Nome</td>
                         <td>User</td>
                         <td>Password</td>
-                        
+
                     </tr>
                 </thead>
                 <tbody>
@@ -60,8 +59,8 @@
                         <td>{{user.name}}</td>
                         <td>{{user.user}}</td>
                         <td>{{user.password}}</td>
-                       
-        
+
+
                         <!-- <td *ngIf="ticket.status == 1">Aberto</td>
                                         <td *ngIf="ticket.status == 2">Em Andamento</td>
                                         <td *ngIf="ticket.status == 3">Fechado</td> -->
@@ -72,9 +71,9 @@
                             <a class="btn btn-success" *ngIf="(profile == 'administrator') && (product.flag == 'inative')" (click)="activeProduct(product)">Ativar</a> -->
                         </td>
                     </tr>
-        
+
                 </tbody>
-        
+
             </table>
         </div>
         <div *ngIf="clienteView">
@@ -85,7 +84,7 @@
                         <td>Nome</td>
                         <td>User</td>
                         <td>Password</td>
-                        
+
                     </tr>
                 </thead>
                 <tbody>
@@ -94,8 +93,8 @@
                         <td>{{user.name}}</td>
                         <td>{{user.user}}</td>
                         <td>{{user.password}}</td>
-                       
-        
+
+
                         <!-- <td *ngIf="ticket.status == 1">Aberto</td>
                                         <td *ngIf="ticket.status == 2">Em Andamento</td>
                                         <td *ngIf="ticket.status == 3">Fechado</td> -->
@@ -106,17 +105,131 @@
                             <a class="btn btn-success" *ngIf="(profile == 'administrator') && (product.flag == 'inative')" (click)="activeProduct(product)">Ativar</a> -->
                         </td>
                     </tr>
-        
+
                 </tbody>
-        
+
             </table>
         </div>
-       
+
     </div>
     <button (click)="registerNewUser()" class="bx--btn bx--btn--secondary">Criar novo usuário</button>
 
-</div>    
+</div>
 
-<div *ngIf=" userProfile == 'cliente' " >
-    <p> Sou cliente</p>
+<div *ngIf=" userProfile == 'cliente' ">
+    <div>
+        <h1>Atualizar meu perfil</h1>
+    </div>
+
+    <div class="exporter-information">
+        <form class="form-horizontal needs-validation" novalidate [formGroup]="updateForm">
+            <div class="form-group">
+                <div>
+                    <div class="col-sm-6">
+                        <label for="cpf" class="control-label required">CPF*</label>
+                        <input disabled type="text" class="form-control" id="cpf" formControlName="cpf">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="email" class="control-label required">email*</label>
+                        <input disabled type="text" class="form-control" id="email" formControlName="email">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="name" class="control-label required">Nome*</label>
+                        <input type="text" class="form-control" id="name" formControlName="name">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="user" class="control-label required">Nome de usuário</label>
+                        <input type="text" class="form-control" id="user" formControlName="user">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="password" class="control-label required">Senha</label>
+                        <input type="text" class="form-control" id="password" formControlName="password">
+                    </div>
+
+                    <div class="addressForm">
+                        <div>
+                            <h2> Endereço de cobrança</h2>
+                            <form class="form-address needs-validation" novalidate formGroupName="billingAddress">
+                                <div class="form-group">
+                                    <div class="col-sm-6">
+                                        <label for="cep" class="control-label required">CEP*</label>
+                                        <input type="text" class="form-control" id="cep" formControlName="cep">
+                                        <span *ngIf="callCepValidation && !cepExists"> CEP inválido</span>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="street" class="control-label required">Endereço*</label>
+                                        <input type="text" class="form-control" id="street" formControlName="street">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="streetNumber" class="control-label required">Número*</label>
+                                        <input type="number" class="form-control" id="streetNumber"
+                                            formControlName="streetNumber">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="neighborhood" class="control-label required">Bairro*</label>
+                                        <input type="text" class="form-control" id="neighborhood"
+                                            formControlName="neighborhood">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="city" class="control-label required">Cidade*</label>
+                                        <input type="text" class="form-control" id="city" formControlName="city">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="state" class="control-label required">Estado*</label>
+                                        <input type="text" class="form-control" id="state" formControlName="state">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="country" class="control-label required">País*</label>
+                                        <input type="text" class="form-control" id="country" formControlName="country">
+                                    </div>
+
+                                </div>
+
+                            </form>
+                        </div>
+
+                        <div>
+                            <h2> Endereço de entrega</h2>
+                            <form class="form-address needs-validation" novalidate formGroupName="maillingAddress">
+                                <div class="form-group">
+                                    <div class="col-sm-6">
+                                        <label for="cep" class="control-label required">CEP*</label>
+                                        <input type="text" class="form-control" id="cep" formControlName="cep">
+                                        <label *ngIf="callCepValidation && !cepExists"> CEP inváaaaaalido</label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="street" class="control-label required">Endereço*</label>
+                                        <input type="text" class="form-control" id="street" formControlName="street">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="streetNumber" class="control-label required">Número*</label>
+                                        <input type="number" class="form-control" id="streetNumber"
+                                            formControlName="streetNumber">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="neighborhood" class="control-label required">Bairro*</label>
+                                        <input type="text" class="form-control" id="neighborhood"
+                                            formControlName="neighborhood">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="city" class="control-label required">Cidade*</label>
+                                        <input type="text" class="form-control" id="city" formControlName="city">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="state" class="control-label required">Estado*</label>
+                                        <input type="text" class="form-control" id="state" formControlName="state">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="country" class="control-label required">País*</label>
+                                        <input type="text" class="form-control" id="country" formControlName="country">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <button type="button" (click)="updateUser()" class="btn btn-primary btn-lg btn-block login-button">Atualizar</button>
+    </div>
 </div>

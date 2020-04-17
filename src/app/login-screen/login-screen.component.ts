@@ -34,15 +34,15 @@ export class LoginScreenComponent implements OnInit {
     }
   }
 
-  callInfoAuth(password, user) {
+  callInfoAuth(password, email) {
     const params = {
-      user,
+      email,
       password
     };
     this.authService.getAllInfo(params).subscribe((complete) => {
       console.log(complete)
       if (complete.autenticado) {
-        this.authService.setAuth({ user }, {profile: complete.data.profile});
+        this.authService.setAuth({ user: complete.data.user }, {profile: complete.data.profile});
         this.router.navigate(['/home']);
       }
     }, (err) => {
