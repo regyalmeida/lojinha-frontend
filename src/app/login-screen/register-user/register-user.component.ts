@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/authentication/auth.service';
+import { ValidationService } from '../../../services/validation/validation.service'; 
 import { Form, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 
@@ -23,11 +24,18 @@ export class RegisterUserComponent implements OnInit {
 
   profileType;
   cepIsValid: boolean = false
+  cepExists: boolean = false
+  callCepValidation: boolean = false
   selectedMaillingType: boolean = false
 
 
 
-  constructor(private http: HttpClient,private authService: AuthService, private fb: FormBuilder) { 
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService, 
+    private fb: FormBuilder, 
+    private validationService: ValidationService
+    ) { 
     this.objLogin = this.authService.getAuth();
   }
 
@@ -79,11 +87,15 @@ export class RegisterUserComponent implements OnInit {
       if( val.cep.length == 8){
         this.cepIsValid = true
         //TODO: incluir a chamada pra o backend verificar se o cep é valido
-        console.log(val);
+        this.validationService.sendCepToValidation(val.cep).subscribe(response =>{
+          this.callCepValidation = true
+          this.cepExists = response.data.isValid          
+        }, error =>{
+
+        })        
       } else {
         this.cepIsValid = false
-      }
-      // this.profileType = val;
+      }      
       
     });
   }
@@ -105,10 +117,11 @@ export class RegisterUserComponent implements OnInit {
   }
 
   createUser() {
-    this.authService.registerNewUser(this.registerForm.value).subscribe(response => {
-      console.log("Resposta", response)
-    })
-
+    if(this.cepExists) {
+      console.log(this.registerForm.value)
+      this.authService.registerNewUser(this.registerForm.value).subscribe(response => {
+        console.log("Resposta", response)
+      })      
+    }
   }
-
 }

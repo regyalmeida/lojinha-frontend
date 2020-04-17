@@ -44,7 +44,7 @@
                                 <div class="col-sm-6">
                                     <label for="cep" class="control-label required">CEP*</label>
                                     <input type="text" class="form-control" id="cep" formControlName="cep">
-                                    <span *ngIf="!cepIsValid"> CEP inválido</span>
+                                    <span *ngIf="callCepValidation && !cepExists"> CEP inválido</span>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="street" class="control-label required">Endereço*</label>
@@ -93,7 +93,7 @@
                                 <div class="col-sm-6">
                                     <label for="cep" class="control-label required">CEP*</label>
                                     <input type="text" class="form-control" id="cep" formControlName="cep">
-                                    <span *ngIf="!cepIsValid"> CEP inválido</span>
+                                    <label *ngIf="callCepValidation && !cepExists"> CEP inváaaaaalido</label>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="street" class="control-label required">Endereço*</label>
