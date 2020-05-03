@@ -33,14 +33,14 @@ export class NavBarComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-
-
   limparValor() {
     location.reload()
   }
 
 
-
+  go2Cart(){
+    this.router.navigate(['/carrinho']);
+  }
 
 
 }

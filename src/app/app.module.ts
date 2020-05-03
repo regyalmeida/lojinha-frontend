@@ -17,13 +17,15 @@ import { ProdutsScreenComponent } from './produts-screen/produts-screen.componen
 import { RegisterUserComponent } from './login-screen/register-user/register-user.component';
 import { HomeProductComponent } from './home-screen/product/home-product.component';
 import { FaqComponent } from './faq/faq.component';
+import { ShoppingComponent } from './shopping/shopping.component';
 
 const appRoutes: Routes = [
   { path: '', component: LoginScreenComponent, },
   { path: 'novo/usuario', component: RegisterUserComponent, canActivate: [] },
   { path: 'home', component: HomeScreenComponent, canActivate: [AppGuardGuard] },
   { path: 'gerenciar/usuarios', component: UsersScreenComponent, canActivate: [AppGuardGuard] },
-  { path: 'gerenciar/produtos', component: ProdutsScreenComponent, canActivate: [AppGuardGuard] }
+  { path: 'gerenciar/produtos', component: ProdutsScreenComponent, canActivate: [AppGuardGuard] },
+  { path: 'carrinho', component: ShoppingComponent, canActivate: [AppGuardGuard]}
 ];
 
 @NgModule({
@@ -37,6 +39,7 @@ const appRoutes: Routes = [
     RegisterUserComponent,
     HomeProductComponent,
     FaqComponent,
+    ShoppingComponent,
   ],
   imports: [
     BrowserModule,

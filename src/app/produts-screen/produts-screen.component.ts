@@ -4,6 +4,7 @@ import { AuthService } from '../../services/authentication/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Form, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-produts-screen',
@@ -16,7 +17,8 @@ export class ProdutsScreenComponent implements OnInit {
     private productService: ProductService,
     private _sanitizer: DomSanitizer,
     private authService: AuthService,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder,
+    private router: Router) { }
 
   create: boolean = false;
   product: any;
@@ -54,6 +56,8 @@ export class ProdutsScreenComponent implements OnInit {
 
   updatedPrice: any
   updatedQuantity: any
+
+  productQuantity
 
   ngOnInit() {
     this.profile = this.authService.getProfile().profile
@@ -160,6 +164,39 @@ export class ProdutsScreenComponent implements OnInit {
     this.productService.activeProduct(product).subscribe(response => {
       console.log('response do delete', response)
     })
+  }
+
+  saveQuantity(event){
+    this.productQuantity = event.target.value
+  }
+
+  getCartProducts() {
+    return JSON.parse(window.localStorage.getItem('cart'));
+  }
+
+  setProduct2Cart(cart, quantity, product) {
+    let productInfo = { quantity: quantity, product: product }
+    var newCart
+    if(cart) {
+      newCart = cart
+      let found = newCart.data.findIndex(element => element.product.name == productInfo.product.name);
+      if(found != -1) {
+        newCart.data[found].quantity = quantity
+      } else {
+        newCart.data.push(productInfo)
+      }
+    } else {
+      newCart = {data: []}      
+      newCart.data.push(productInfo)
+    }
+    
+    window.localStorage.setItem('cart', JSON.stringify(newCart));    
+  }
+
+  go2Cart(){
+    let cart = this.getCartProducts()
+    this.setProduct2Cart(cart, this.productQuantity, this.product)
+    this.router.navigate(['/carrinho']);
   }
 
 }

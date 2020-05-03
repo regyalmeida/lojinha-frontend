@@ -13,6 +13,11 @@
         <p>{{product.name}}</p>
         <p>{{product.description}}</p>
       </div>
+      <div class="add-to-cart">
+        <label for="quantity">Escolha a quantidade</label>
+        <input (input)="saveQuantity($event)" id='quantity' type="number">
+        <button (click)="go2Cart()"> Adicionar ao carrinho </button>
+      </div>
       <div *ngIf="profile !== 'cliente' ">
         <button *ngIf="(profile == 'administrador') && (product.flag == 'active')" (click)="inactiveProduct(product)">Inativar produto</button>
         <button *ngIf="(profile == 'administrador') && (product.flag == 'inative')" (click)="activeProduct(product)">Ativar produto</button>
