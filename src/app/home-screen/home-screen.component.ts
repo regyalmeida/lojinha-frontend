@@ -21,7 +21,8 @@ export class HomeScreenComponent implements OnInit {
 
   ngOnInit() {
     this.getProducts()
-    this.profile = this.authService.getProfile().profile
+    this.profile = this.authService.getProfile()
+    if(this.profile) this.profile = this.authService.getProfile().profile 
   }
 
   getProducts(){

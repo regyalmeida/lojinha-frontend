@@ -1,24 +1,42 @@
 <app-nav-bar> </app-nav-bar>
 
-<div *ngIf="!cart || (cart.data.length == 0)">
-    <h1>Você não possui itens no carrinho</h1>
+<div *ngIf="(!cart) || (cart.data.length == 0)">
+  <h1>Você não possui itens no carrinho</h1>
 </div>
 
-<div *ngFor="let item of productsInformation"> 
-    <div class="card mb-3" style="max-width: 540px;">
+<div class="align-cards">
+
+  <div>
+    <div *ngFor="let item of productsInformation">
+      <div class="card mb-3" style="max-width: 540px;">
         <div class="row no-gutters">
           <div class="col-md-4">
-            <img class="card-img" [src]=item.product.imagePath/>
+            <img class="card-img" [src]=item.product.imagePath />
           </div>
           <div class="col-md-8">
             <div class="card-body">
               <h5 class="card-title">{{item.product.name}}</h5>
               <p class="card-text">{{item.product.description}}</p>
-              <p class="card-text">{{item.product.price}}</p>
+              <p class="card-text">{{item.product.price | currency:'BRL':true }}</p>
               <input (input)="saveQuantity($event, item.product.name)" type="number" value={{item.quantity}}>
               <button (click)="removeProduct(item.product.name)">Remover item do carrinho</button>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="card">
+      <div class="card-header">
+        Resumo da compra
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Valor Total</h5>
+        <p class="card-text">{{totalPrice | currency:'BRL':true }}</p>
+        <a (click)="checkout()" class="btn btn-primary">Finalizar compra</a>
+      </div>
+    </div>
+  </div>
 </div>

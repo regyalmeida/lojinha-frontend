@@ -18,7 +18,7 @@ export class AppGuardGuard implements CanActivate {
     if (this.authService.isLoggedIn()) {
       return true;
     } else {
-      return this.router.parseUrl('/');
+      return this.router.navigate(['/']);
     }
   }
 }

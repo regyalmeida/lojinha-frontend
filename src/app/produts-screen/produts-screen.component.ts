@@ -189,13 +189,16 @@ export class ProdutsScreenComponent implements OnInit {
       newCart = {data: []}      
       newCart.data.push(productInfo)
     }
-    
+  
     window.localStorage.setItem('cart', JSON.stringify(newCart));    
   }
 
   go2Cart(){
     let cart = this.getCartProducts()
-    this.setProduct2Cart(cart, this.productQuantity, this.product)
+    console.log(this.productQuantity)
+    let quantity = (this.productQuantity!="1") ? this.productQuantity : 1
+    console.log(quantity)
+    this.setProduct2Cart(cart, quantity, this.product)
     this.router.navigate(['/carrinho']);
   }
 

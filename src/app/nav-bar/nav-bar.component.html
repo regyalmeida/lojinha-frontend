@@ -8,15 +8,16 @@
                 <a *ngIf="profile == 'administrador' " routerLink="/gerenciar/usuarios" routerLinkActive="selected">Gerenciar Usuários</a>
             </div>
             <div >
-                <a *ngIf="profile !== 'cliente' " routerLink="/gerenciar/produtos" routerLinkActive="selected">Gerenciar Produtos</a>
+                <a *ngIf="profile == 'administrador' || profile == 'estoquista'" routerLink="/gerenciar/produtos" routerLinkActive="selected">Gerenciar Produtos</a>
             </div>
         </div>
         <div *ngIf="userName">
             <a *ngIf="profile == 'cliente' " routerLink="/gerenciar/usuarios" routerLinkActive="selected">Olá {{userName}}</a>
         </div>
         <div>
-            <a routerLink="/carrinho" routerLinkActive="selected" >xxx</a>
+            <a routerLink="/carrinho" routerLinkActive="selected" >Carrinho</a>
         </div>
-    <button (click)="exit()">Sair</button>
+    <button *ngIf="profile" (click)="exit()">Sair</button>
+    <button *ngIf="!profile" (click)="login()">Entrar</button>
     </div>
 </header>

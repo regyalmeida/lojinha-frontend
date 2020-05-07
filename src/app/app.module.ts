@@ -20,12 +20,13 @@ import { FaqComponent } from './faq/faq.component';
 import { ShoppingComponent } from './shopping/shopping.component';
 
 const appRoutes: Routes = [
-  { path: '', component: LoginScreenComponent, },
+  { path: '', component: HomeScreenComponent, },
+  { path: 'login', component: LoginScreenComponent, canActivate: [] },
+  { path: 'home', component: HomeScreenComponent, canActivate: [] },
   { path: 'novo/usuario', component: RegisterUserComponent, canActivate: [] },
-  { path: 'home', component: HomeScreenComponent, canActivate: [AppGuardGuard] },
   { path: 'gerenciar/usuarios', component: UsersScreenComponent, canActivate: [AppGuardGuard] },
   { path: 'gerenciar/produtos', component: ProdutsScreenComponent, canActivate: [AppGuardGuard] },
-  { path: 'carrinho', component: ShoppingComponent, canActivate: [AppGuardGuard]}
+  { path: 'carrinho', component: ShoppingComponent, canActivate: []}
 ];
 
 @NgModule({

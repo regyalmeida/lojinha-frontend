@@ -20,12 +20,17 @@ export class NavBarComponent implements OnInit {
 
   constructor(private activatedRouter: ActivatedRoute, private authService: AuthService, private router: Router) {
     const objLogin = this.authService.getAuth();
-    this.userName = objLogin.user;
+    if(objLogin) this.userName = objLogin.user;
   }
 
   ngOnInit() {
-    this.profile = this.authService.getProfile().profile
+    this.profile = this.authService.getProfile()
+    if(this.profile) this.profile = this.authService.getProfile().profile 
     console.log("O perfil é de:  ", this.profile)
+  }
+  
+  login() {
+    this.router.navigate(['/login']);
   }
 
   exit() {

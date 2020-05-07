@@ -15,7 +15,7 @@
       </div>
       <div class="add-to-cart">
         <label for="quantity">Escolha a quantidade</label>
-        <input (input)="saveQuantity($event)" id='quantity' type="number">
+        <input (input)="saveQuantity($event)" id='quantity' value="1" type="number">
         <button (click)="go2Cart()"> Adicionar ao carrinho </button>
       </div>
       <div *ngIf="profile !== 'cliente' ">

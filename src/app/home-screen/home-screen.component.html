@@ -1,12 +1,12 @@
 <app-nav-bar></app-nav-bar>
 
-<div *ngIf="profile == 'cliente' ">
-    <div class='all-products' *ngFor='let product of products'>
+<div *ngIf=" (profile == 'cliente')|| !profile ">
+    <div class="all-products" *ngFor='let product of products'>
         <app-product [product]='product' (productCallback)="openProductDetails($event.product)"> </app-product>
     </div>
 </div>
 
-<div *ngIf=" (profile != 'cliente')  ">
+<div *ngIf=" (profile == 'administrador') || (profile == 'estoquista') ">
         <table class="table table-bordered">
             <thead>
                 <tr>

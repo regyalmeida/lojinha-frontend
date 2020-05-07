@@ -26,7 +26,9 @@ export class AuthService {
   }
 
   getProfile() {
+    console.log(window.localStorage.getItem('profile'))
     return JSON.parse(window.localStorage.getItem('profile'));
+
   }
 
   setAuth(auth, profile) {
