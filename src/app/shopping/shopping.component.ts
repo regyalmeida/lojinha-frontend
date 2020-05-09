@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/services/authentication/auth.service';
+import { ShoppingService } from 'src/services/shopping/shopping.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,11 +12,20 @@ export class ShoppingComponent implements OnInit {
 
   constructor( 
     private authService: AuthService,
-    private router: Router) { }
+    private router: Router,
+    private shoppingService: ShoppingService) { }
+
   productsInformation
   cart
   totalPrice = 0
   profile
+  username
+  userRecovered:boolean=false
+  userMaillingAddress
+  userBillingAddress
+  cep
+  freight = 0
+  canCheckout:boolean = false
 
   ngOnInit() {
     this.cart = this.getCartProducts()
@@ -26,7 +36,13 @@ export class ShoppingComponent implements OnInit {
     } 
 
     this.profile = this.authService.getProfile()
-    if(this.profile) this.profile = this.authService.getProfile().profile     
+    if(this.profile) { 
+      this.username = this.authService.getAuth().user
+      this.profile = this.authService.getProfile().profile    
+      this.recoverUserInfo()
+    } else {
+      this.cep = ""
+    }
   }
   
   getCartProducts() {
@@ -54,17 +70,76 @@ export class ShoppingComponent implements OnInit {
     location.reload(); 
   }
 
+  saveCep(event, cep){    
+    var value
+    if(event || cep) {
+      if(event){ 
+        if(event.target.value !="") {
+          value = event.target.value
+        } else {
+          this.freight = 0          
+          this.calculateTotalPrice()
+        }
+      } else {
+        value = cep
+      }
+
+      if(value) { 
+        this.shoppingService.simulateFreight(value).subscribe(response => {
+          console.log('response do delete', response)
+          this.freight = response.data.freight
+          this.calculateTotalPrice()
+        
+        })
+      }
+
+    } else {
+      this.freight = 0
+      this.calculateTotalPrice()
+    }
+  }
+
   calculateTotalPrice(){
     let value = 0
-    this.cart.data.map(item => {
-      value = value + (item.quantity * item.product.price)
+    if(this.cart) {
+      this.cart.data.map(item => {
+        value = value + (item.quantity * item.product.price)
+      })
+    }
+    console.log("total prce", this.totalPrice)
+    this.totalPrice = value + this.freight
+  }
+
+  recoverUserInfo(){
+    this.authService.recoverOneUser(this.username).subscribe(response => { 
+      console.log("recover usrr",response.data)
+      this.userMaillingAddress = response.data[0].maillingAddress 
+      this.userBillingAddress = response.data[0].billingAddress 
+      this.cep = this.userMaillingAddress.cep
+      this.saveCep(null, this.cep)
+      this.userRecovered = true
     })
-    this.totalPrice = value
+  }  
+
+  selectAddress(selectedAddress) {
+    if(selectedAddress == "mailling"){
+      this.cep = this.userMaillingAddress.cep
+    } else {
+      this.cep = this.userBillingAddress.cep
+    }
+    this.saveCep(null, this.cep)
+  }
+
+  selectPayment(selectedPayment){
+
   }
 
   checkout() {
     if(this.profile) {
-      console.log("Está logado e vai para o checkout")
+      if(this.cep) {
+        this.canCheckout = true
+        console.log("Está logado e vai para o checkout")
+      } 
     } 
     else {
       this.router.navigate(['/login']);

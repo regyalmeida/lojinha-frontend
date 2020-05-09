@@ -57,7 +57,7 @@ export class ProdutsScreenComponent implements OnInit {
   updatedPrice: any
   updatedQuantity: any
 
-  productQuantity
+  productQuantity = 1
 
   ngOnInit() {
     this.profile = this.authService.getProfile().profile
@@ -167,6 +167,7 @@ export class ProdutsScreenComponent implements OnInit {
   }
 
   saveQuantity(event){
+    console.log(event.target.value)
     this.productQuantity = event.target.value
   }
 
@@ -196,7 +197,7 @@ export class ProdutsScreenComponent implements OnInit {
   go2Cart(){
     let cart = this.getCartProducts()
     console.log(this.productQuantity)
-    let quantity = (this.productQuantity!="1") ? this.productQuantity : 1
+    let quantity = (this.productQuantity!=1) ? this.productQuantity : 1
     console.log(quantity)
     this.setProduct2Cart(cart, quantity, this.product)
     this.router.navigate(['/carrinho']);

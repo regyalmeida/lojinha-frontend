@@ -5,7 +5,6 @@
 </div>
 
 <div class="align-cards">
-
   <div>
     <div *ngFor="let item of productsInformation">
       <div class="card mb-3" style="max-width: 540px;">
@@ -28,15 +27,57 @@
   </div>
 
   <div>
-    <div class="card">
+    <div  class="card">
       <div class="card-header">
-        Resumo da compra
+        Informações para envio
       </div>
       <div class="card-body">
+        <div *ngIf="profile && userRecovered" class="select-address">
+          <h5>Selecione o Endereço</h5>
+          <a (click)="selectAddress('mailling')" class="btn btn-primary">Endereço Principal</a> 
+          <a (click)="selectAddress('billing')" class="btn btn-primary">Endereço Secundário</a>
+          <p>Endereço Principal: {{userMaillingAddress.street}}, {{userMaillingAddress.streetNumber}}, {{userMaillingAddress.cep}}</p>
+          <p>Endereço Secundário: {{userBillingAddress.street}}, {{userBillingAddress.streetNumber}}, {{userMaillingAddress.cep}}</p>
+
+        </div>
+        
+        <div class="frete">
+          <h5>CEP</h5>
+          <input (input)="saveCep($event)" type="text" value={{cep}}>
+        </div>
         <h5 class="card-title">Valor Total</h5>
         <p class="card-text">{{totalPrice | currency:'BRL':true }}</p>
-        <a (click)="checkout()" class="btn btn-primary">Finalizar compra</a>
+        <a (click)="checkout()" disable="!cep || !profile" class="btn btn-primary">Finalizar compra</a>
       </div>
     </div>
   </div>
+
+  <div *ngIf="canCheckout"> 
+    <div class="card-header">
+      Forma de Pagamento
+    </div>
+    <div class="card-body">
+      <div class="select-payment">
+        <h5>Selecione o Endereço</h5>
+        <a (click)="selectPayment('bankSlip')" class="btn btn-primary">Boleto Bancário</a> 
+        <a (click)="selectPayment('creditCard')" class="btn btn-primary">Cartao de Crédito</a>
+        <p>Endereço Principal: {{userMaillingAddress.street}}, {{userMaillingAddress.streetNumber}}, {{userMaillingAddress.cep}}</p>
+        <p>Endereço Secundário: {{userBillingAddress.street}}, {{userBillingAddress.streetNumber}}, {{userMaillingAddress.cep}}</p>
+  
+      </div>
+      
+      <div class="frete">
+        <h5>CEP</h5>
+        <input (input)="saveCep($event)" type="text" value={{cep}}>
+      </div>
+      <h5 class="card-title">Valor Total</h5>
+      <p class="card-text">{{totalPrice | currency:'BRL':true }}</p>
+      <a (click)="checkout()" class="btn btn-primary">Finalizar compra</a>
+    </div>
+  
+  </div>
+  
+
 </div>
+
+
