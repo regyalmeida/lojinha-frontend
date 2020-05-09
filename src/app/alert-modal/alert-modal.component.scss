@@ -1,0 +1,98 @@
+.container-modal-alert-mask {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    position: fixed;
+    background-color: #f5f5f5;
+    opacity: 0.9;
+  }
+  .container-modal-alert {
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    .box-modal-alert {
+      max-width: 639px;
+      max-height: 271px;
+      box-shadow: 0 8px 12px 0 rgba(46, 49, 145, 0.1);
+      background-color: #ffffff;
+  
+      .alert-header {
+        width: 100%;
+        height: 31px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+  
+        i {
+          cursor: pointer;
+        }
+      }
+  
+      .alert-information {
+        width: 639px;
+        height: 131px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-direction: column;
+        margin: 0 30px;
+        h1 {
+          font-size: 24px;
+          font-weight: bold;
+          font-stretch: normal;
+          font-style: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          color: #1a1a1a;
+        }
+        p {
+          font-size: 14px;
+          font-weight: normal;
+          font-stretch: normal;
+          font-style: normal;
+          line-height: 1.43;
+          letter-spacing: normal;
+          color: #565656;
+        }
+      }
+      .alert-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 639px;
+        height: 110px;
+        background-color: #0030600c;
+  
+        button {
+          width: 224px;
+          height: 50px;
+          border-radius: 16px;
+          margin: 0 30px;
+          font-size: 14px;
+        }
+  
+        .style1-button {
+          background-color: #003060;
+          color: #ffffff;
+          border: 2px solid #003060;
+        }
+  
+        .style2-button {
+          background-color: #ffffff;
+          color: #003060;
+          border: 2px solid #003060;
+        }
+      }
+    }
+  }
+  

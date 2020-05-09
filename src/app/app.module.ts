@@ -18,6 +18,7 @@ import { RegisterUserComponent } from './login-screen/register-user/register-use
 import { HomeProductComponent } from './home-screen/product/home-product.component';
 import { FaqComponent } from './faq/faq.component';
 import { ShoppingComponent } from './shopping/shopping.component';
+import { AlertModalComponent } from './alert-modal/alert-modal.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeScreenComponent, },
@@ -41,6 +42,7 @@ const appRoutes: Routes = [
     HomeProductComponent,
     FaqComponent,
     ShoppingComponent,
+    AlertModalComponent,
   ],
   imports: [
     BrowserModule,

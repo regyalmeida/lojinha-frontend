@@ -30,4 +30,24 @@ simulateFreight(cep) {
     )
 }
 
+checkout(shoppingObject) {
+  return this.http.post<any>(this.url + '/shop/checkout', shoppingObject)
+    .pipe(
+      map(response => {
+        console.log('service resposnse', response)
+        return response;
+      })
+    );
+}
+recoverOrders(username) {
+  return this.http.get<any>(this.url + '/shop/recover/orders', 
+  {params: new HttpParams().set('username', username)})
+  .pipe(
+    map(response => {
+      console.log('service resposnse', response)
+      return response;
+    })
+  );
+}
+
 }
