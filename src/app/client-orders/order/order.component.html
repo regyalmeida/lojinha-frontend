@@ -1,13 +1,13 @@
 <div class="card">
     <div class="card-header">
-        <h2 class="mb-0">
+        <!-- <h2 class="mb-0"> -->
             <button (click)="showCollapse($event)" class="btn btn-link btn-block text-left" type="button" aria-expanded="true" aria-controls="collapseOne">
-                <h2 class="mb-0">Número do pedido: {{order.checkoutCode}} </h2>
-                <h2 class="mb-0">Data da compra: {{order.date}} </h2>
-                <h2 class="mb-0">Valor total: R${{order.totalPrice}}</h2>
-                <h2 class="mb-0">Status: {{order.status}}</h2>
+                <h2 class="mb-0">Pedido: #{{order.checkoutCode}} </h2>
+                <h4 class="mb-0">Data da compra: {{order.date}} </h4>
+                <h4 class="mb-0">Valor total: R${{order.totalPrice}}</h4>
+                <h4 class="mb-0">Status: {{order.status}}</h4>
             </button>
-        </h2>
+        <!-- </h2> -->
     </div>
 
     <div *ngIf="isShowCollapse"   class="collapse show" aria-labelledby="headingOne">
