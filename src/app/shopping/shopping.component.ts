@@ -96,7 +96,7 @@ export class ShoppingComponent implements OnInit {
 
       if(value) { 
         this.shoppingService.simulateFreight(value).subscribe(response => {
-          console.log('response do delete', response)
+         
           this.freight = response.data.freight
           this.calculateTotalPrice()
         
@@ -122,7 +122,6 @@ export class ShoppingComponent implements OnInit {
 
   recoverUserInfo(){
     this.authService.recoverOneUser(this.username).subscribe(response => { 
-      console.log("recover usrr",response.data)
       this.userMaillingAddress = response.data[0].maillingAddress 
       this.userBillingAddress = response.data[0].billingAddress 
       this.cep = this.userMaillingAddress.cep
@@ -179,7 +178,6 @@ export class ShoppingComponent implements OnInit {
       paymentMethod: this.paymentMethod
     }
     this.shoppingService.checkout(shoppingObject).subscribe(response => { 
-      console.log("Fimmmmmm", response)
       this.loading = false
       this.alertParams = {
         alertBody: `Sua compra foi efetuada com sucesso. Código para acompanhamento: ${response.data.checkoutCode}`
@@ -196,8 +194,8 @@ export class ShoppingComponent implements OnInit {
   }
 
   endConfirmationModal(event){
-    console.log(event)
    this.confirmationModal = false 
+   window.localStorage.removeItem("cart")
    this.router.navigate(['/pedidos']);
   }
 
