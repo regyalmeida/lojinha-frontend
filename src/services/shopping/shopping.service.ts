@@ -41,7 +41,7 @@ checkout(shoppingObject) {
 }
 recoverOrders(username) {
   return this.http.get<any>(this.url + '/shop/recover/orders', 
-  {params: new HttpParams().set('username', username)})
+  {params: new HttpParams().set('user', username)})
   .pipe(
     map(response => {
       console.log('service resposnse', response)

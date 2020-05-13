@@ -1,0 +1,63 @@
+<div class="card">
+    <div class="card-header">
+        <h2 class="mb-0">
+            <button (click)="showCollapse($event)" class="btn btn-link btn-block text-left" type="button" aria-expanded="true" aria-controls="collapseOne">
+                <h2 class="mb-0">Número do pedido: {{order.checkoutCode}} </h2>
+                <h2 class="mb-0">Data da compra: {{order.date}} </h2>
+                <h2 class="mb-0">Valor total: R${{order.totalPrice}}</h2>
+                <h2 class="mb-0">Status: {{order.status}}</h2>
+            </button>
+        </h2>
+    </div>
+
+    <div *ngIf="isShowCollapse"   class="collapse show" aria-labelledby="headingOne">
+        <div class="card-body">
+            <div class="products">
+                <h5 class="card-text">Produtos escolhidos</h5>
+                <div class="row">
+                  <div *ngFor="let item of order.itens" class="col-sm-6">
+                    <div class="card">
+                      <div class="card-body" style="display: flex;">
+                        <div class="col-md-4">
+                          <img class="card-img" [src]=item.product.imagePath />
+                        </div>
+                        <div>
+                          <h5 class="card-title">{{item.product.name}}</h5>
+                          <p class="card-text">{{item.product.description}}</p>
+                          <p class="card-text">Valor unitário: {{item.product.price | currency:'BRL':true }}</p>
+                          <p class="card-text">Quantidade: {{item.quantity}}</p>
+                          <p class="card-text">Valor Total: {{item.product.price * item.quantity  | currency:'BRL':true }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        
+              <div class="shipping">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Informações de Entrega</h5>
+                        <p class="card-text">Frete: {{order.freight | currency:'BRL':true}}</p>
+                        <p class="card-text">Endereço: {{order.shippingAddress.street}}, {{order.shippingAddress.streetNumber}}</p>
+                      </div>
+                    </div>
+                  </div>
+                    <div class="col-sm-6">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title">Informações de Pagamento</h5>
+                          <p class="card-text">Forma de pagamento: {{order.paymentMethod}}</p>
+                          <h6 class="card-text">Valor Geral: {{order.totalPrice | currency:'BRL':true }}</h6>
+                        </div>
+                      </div>            
+                  </div>
+        
+                </div>
+        
+              </div>
+      </div>
+    </div>
+</div>

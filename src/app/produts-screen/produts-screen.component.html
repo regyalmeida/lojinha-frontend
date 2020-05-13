@@ -18,7 +18,7 @@
         <input (input)="saveQuantity($event)" id='quantity' value=1 type="number">
         <button (click)="go2Cart()"> Adicionar ao carrinho </button>
       </div>
-      <div *ngIf="profile !== 'cliente' ">
+      <div *ngIf=" (profile != 'cliente') && profile ">
         <button *ngIf="(profile == 'administrador') && (product.flag == 'active')" (click)="inactiveProduct(product)">Inativar produto</button>
         <button *ngIf="(profile == 'administrador') && (product.flag == 'inative')" (click)="activeProduct(product)">Ativar produto</button>
         <button (click)="updateProduct()">Atualizar produto</button>

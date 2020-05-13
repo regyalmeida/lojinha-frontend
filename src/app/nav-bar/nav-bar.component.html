@@ -13,6 +13,7 @@
         </div>
         <div *ngIf="userName">
             <a *ngIf="profile == 'cliente' " routerLink="/gerenciar/usuarios" routerLinkActive="selected">Olá {{userName}}</a>
+            <a *ngIf="profile == 'cliente' " routerLink="/pedidos" routerLinkActive="selected">Meus pedidos</a>
         </div>
         <div>
             <a routerLink="/carrinho" routerLinkActive="selected" >Carrinho</a>

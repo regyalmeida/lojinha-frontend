@@ -198,6 +198,7 @@ export class ShoppingComponent implements OnInit {
   endConfirmationModal(event){
     console.log(event)
    this.confirmationModal = false 
+   this.router.navigate(['/pedidos']);
   }
 
   giveUp(){

@@ -19,6 +19,8 @@ import { HomeProductComponent } from './home-screen/product/home-product.compone
 import { FaqComponent } from './faq/faq.component';
 import { ShoppingComponent } from './shopping/shopping.component';
 import { AlertModalComponent } from './alert-modal/alert-modal.component';
+import { ClientOrdersComponent } from './client-orders/client-orders.component';
+import { OrderComponent } from './client-orders/order/order.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeScreenComponent, },
@@ -26,8 +28,10 @@ const appRoutes: Routes = [
   { path: 'home', component: HomeScreenComponent, canActivate: [] },
   { path: 'novo/usuario', component: RegisterUserComponent, canActivate: [] },
   { path: 'gerenciar/usuarios', component: UsersScreenComponent, canActivate: [AppGuardGuard] },
-  { path: 'gerenciar/produtos', component: ProdutsScreenComponent, canActivate: [AppGuardGuard] },
-  { path: 'carrinho', component: ShoppingComponent, canActivate: []}
+  { path: 'gerenciar/produtos', component: ProdutsScreenComponent, canActivate: [] },
+  { path: 'carrinho', component: ShoppingComponent, canActivate: []},
+  { path: 'pedidos', component: ClientOrdersComponent, canActivate: [AppGuardGuard]}
+
 ];
 
 @NgModule({
@@ -43,6 +47,8 @@ const appRoutes: Routes = [
     FaqComponent,
     ShoppingComponent,
     AlertModalComponent,
+    ClientOrdersComponent,
+    OrderComponent,
   ],
   imports: [
     BrowserModule,

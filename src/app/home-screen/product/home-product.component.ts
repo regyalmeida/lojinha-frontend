@@ -16,6 +16,7 @@ export class HomeProductComponent implements OnInit {
   constructor(private _sanitizer: DomSanitizer ) { }
 
   ngOnInit() {
+    console.log("gdgdhdj")
     this.getImagePath()
   }
 

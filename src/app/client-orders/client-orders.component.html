@@ -1,0 +1,16 @@
+<app-nav-bar></app-nav-bar>
+
+<div *ngIf="loading" class="spinner-border" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+
+<div *ngIf="!loading">
+  <div *ngFor="let order of orders">
+    <div class="accordion" id="accordionExample">
+      <div class="card">
+        <app-order [order]='order'></app-order>
+      </div>
+    </div>
+
+  </div>
+</div>

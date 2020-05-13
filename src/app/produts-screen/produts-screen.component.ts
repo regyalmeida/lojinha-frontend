@@ -60,8 +60,9 @@ export class ProdutsScreenComponent implements OnInit {
   productQuantity = 1
 
   ngOnInit() {
-    this.profile = this.authService.getProfile().profile
-    console.log("O perfil é de:", this.profile)
+    this.profile = this.authService.getProfile()
+    console.log(this.profile)
+    if(this.profile) this.profile = this.authService.getProfile().profile 
     if (history.state.data) {    //caso tenha chegado aqui para detalhe do produto
       this.product = history.state.data
       console.log(this.product)
