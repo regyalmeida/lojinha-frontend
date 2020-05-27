@@ -51,7 +51,7 @@
 
           <div class="frete">
             <h5>CEP</h5>
-            <input (input)="saveCep($event)" type="text" value={{cep}}>
+            <input (input)="saveCep($event, null)" type="text" value={{cep}}>
           </div>
           <h5 class="card-title">Valor Total</h5>
           <p class="card-text">{{totalPrice | currency:'BRL':true }}</p>

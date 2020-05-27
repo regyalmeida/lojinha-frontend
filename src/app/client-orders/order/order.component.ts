@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { AuthService } from 'src/services/authentication/auth.service';
+import { ShoppingService } from 'src/services/shopping/shopping.service';
 
 @Component({
   selector: 'app-order',
@@ -11,16 +13,37 @@ export class OrderComponent implements OnInit {
   // @Output() orderCallback: EventEmitter<any> = new EventEmitter<any>();
  
   isShowCollapse: boolean = false;
+  profile: any;
+  username: any;
 
-  constructor() { }
+  constructor(  private authService: AuthService,private shoppingService: ShoppingService) { }
 
   ngOnInit() {
-
+    this.profile = this.authService.getProfile()
+    if(this.profile) { 
+      this.username = this.authService.getAuth().user
+      this.profile = this.authService.getProfile().profile    
+    }
     console.log("orderrrrrr ", this.order)
   }
 
   showCollapse() {   
     this.isShowCollapse = !this.isShowCollapse
+  }
+
+  status(event) {
+    this.order.status = event.target.value
+    console.log(event.target.value)
+  }
+
+  updateStatus(){
+    let payload = { status : this.order.status} 
+    this.shoppingService.updateOrder(payload).subscribe(response => { 
+     console.log("atualizou")
+    
+    }, error => {
+     
+    })
   }
 
 }

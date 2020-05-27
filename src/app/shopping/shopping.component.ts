@@ -80,17 +80,24 @@ export class ShoppingComponent implements OnInit {
   }
 
   saveCep(event, cep){    
+    console.log(event, cep)
     var value
     if(event || cep) {
+      console.log("1")
       if(event){ 
+        console.log("2")
         if(event.target.value !="") {
+          console.log("3")
+          this.cep= event.target.value 
           value = event.target.value
         } else {
+          console.log("4")
           this.freight = 0   
           this.cep= null       
           this.calculateTotalPrice()
         }
       } else {
+        console.log("5")
         value = cep
       }
 
@@ -104,6 +111,7 @@ export class ShoppingComponent implements OnInit {
       }
 
     } else {
+      console.log("6")
       this.freight = 0
       this.calculateTotalPrice()
     }

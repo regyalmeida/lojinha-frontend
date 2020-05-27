@@ -18,6 +18,7 @@ private httpOptions = {
   })
 };
 
+params = new HttpParams();
 
 simulateFreight(cep) {
   return this.http.get<any>(this.url + '/shop/freight',
@@ -39,9 +40,22 @@ checkout(shoppingObject) {
       })
     );
 }
-recoverOrders(username) {
+recoverOrders(username, profile) {
+  this.params = this.params.append('user', username);
+  this.params = this.params.append('profile', profile);
+
   return this.http.get<any>(this.url + '/shop/recover/orders', 
-  {params: new HttpParams().set('user', username)})
+  {params: this.params})
+  .pipe(
+    map(response => {
+      console.log('service resposnse', response)
+      return response;
+    })
+  );
+}
+
+updateOrder(payload){
+  return this.http.put<any>(this.url + '/shop/order/', payload)
   .pipe(
     map(response => {
       console.log('service resposnse', response)

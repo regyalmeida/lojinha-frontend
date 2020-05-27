@@ -3,9 +3,10 @@
         <!-- <h2 class="mb-0"> -->
             <button (click)="showCollapse($event)" class="btn btn-link btn-block text-left" type="button" aria-expanded="true" aria-controls="collapseOne">
                 <h2 class="mb-0">Pedido: #{{order.checkoutCode}} </h2>
-                <h4 class="mb-0">Data da compra: {{order.date}} </h4>
+                <h4 class="mb-0">Data da compra: {{order.dateTime.date}} </h4>
                 <h4 class="mb-0">Valor total: R${{order.totalPrice}}</h4>
-                <h4 class="mb-0">Status: {{order.status}}</h4>
+                <h4 *ngIf="profile == 'cliente' " class="mb-0">Status: {{order.status}}</h4>
+                <h4 *ngIf="profile != 'cliente' " class="mb-0">Status atual: {{order.status}}</h4>
             </button>
         <!-- </h2> -->
     </div>
@@ -13,6 +14,7 @@
     <div *ngIf="isShowCollapse"   class="collapse show" aria-labelledby="headingOne">
         <div class="card-body">
             <div class="products">
+              <p class="card-text">Horário da compra: {{order.dateTime.time}}</p>           
                 <h5 class="card-text">Produtos escolhidos</h5>
                 <div class="row">
                   <div *ngFor="let item of order.itens" class="col-sm-6">
@@ -32,9 +34,9 @@
                     </div>
                   </div>
                 </div>
-              </div>
+            </div>
         
-              <div class="shipping">
+            <div class="shipping">
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="card">
@@ -57,7 +59,29 @@
         
                 </div>
         
+            </div>
+            
+            <div class="updateStatus">
+              <h5>Alterar status do pedido</h5>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <select class="form-control" id="exampleFormControlSelect1" (click)="status($event)">
+                      <option value="Aguardando pagamento">Aguardando pagamento</option>
+                      <option value="Pagamento rejeitado">Pagamento rejeitado</option>
+                      <option value="Pagamento com sucesso">Pagamento com sucesso</option>
+                      <option value="Aguardando retirada">Aguardando retirada</option>
+                      <option value="Em trânsito">Em trânsito</option>
+                      <option value="Entregue">Entregue</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <button *ngIf="profile != 'cliente' " (click)="updateStatus()"> Confirmar alteração de status</button>
+                </div>
               </div>
+
+            </div>   
       </div>
     </div>
 </div>

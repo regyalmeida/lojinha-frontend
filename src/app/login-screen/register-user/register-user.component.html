@@ -19,7 +19,7 @@
                     <label for="cpf" class="control-label required">CPF*</label>
                     <input type="text" class="form-control" id="cpf" formControlName="cpf">
                 </div>  
-                <div *ngIf="profileType == 'cliente' "  class="col-sm-6">
+                <div class="col-sm-6">
                     <label for="email" class="control-label required">email*</label>
                     <input type="text" class="form-control" id="email" formControlName="email">
                 </div>      
@@ -36,7 +36,7 @@
                     <input type="text" class="form-control" id="password" formControlName="password">
                 </div>
 
-                <div class="addressForm"> 
+                <div  *ngIf="profileType == 'cliente' " class="addressForm"> 
                     <div>
                         <h2> Endereço de cobrança</h2>
                         <form class="form-address needs-validation" novalidate formGroupName="billingAddress">

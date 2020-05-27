@@ -19,7 +19,7 @@ export class ClientOrdersComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private shoppingService: ShoppingService,) { }
+    private shoppingService: ShoppingService) { }
 
   ngOnInit() {
     this.profile = this.authService.getProfile()
@@ -35,8 +35,7 @@ export class ClientOrdersComponent implements OnInit {
   recoverOrders() {
     this.loading = true
     
-    this.shoppingService.recoverOrders(this.username).subscribe(response => { 
-      console.log("Fimmmmmm", response)
+    this.shoppingService.recoverOrders(this.username, this.profile).subscribe(response => { 
       this.orders = response.data
       this.loading = false
     

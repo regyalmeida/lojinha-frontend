@@ -117,11 +117,18 @@ export class RegisterUserComponent implements OnInit {
   }
 
   createUser() {
-    if(this.cepExists) {
+    if(this.profileType != 'cliente') {
       console.log(this.registerForm.value)
       this.authService.registerNewUser(this.registerForm.value).subscribe(response => {
         console.log("Resposta", response)
-      })      
+      }) 
+    } else {
+      if(this.cepExists) {
+        console.log(this.registerForm.value)
+        this.authService.registerNewUser(this.registerForm.value).subscribe(response => {
+          console.log("Resposta", response)
+        })      
+      }
     }
   }
 }
