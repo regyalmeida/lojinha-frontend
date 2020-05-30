@@ -77,7 +77,7 @@
                   </div>
                 </div>
                 <div class="col-sm-6">
-                  <button *ngIf="profile != 'cliente' " (click)="updateStatus()"> Confirmar alteração de status</button>
+                  <button *ngIf="profile != 'cliente' " (click)="updateStatus(order.checkoutCode)"> Confirmar alteração de status</button>
                 </div>
               </div>
 

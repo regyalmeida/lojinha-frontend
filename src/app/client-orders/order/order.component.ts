@@ -34,10 +34,11 @@ export class OrderComponent implements OnInit {
   status(event) {
     this.order.status = event.target.value
     console.log(event.target.value)
+     
   }
 
-  updateStatus(){
-    let payload = { status : this.order.status} 
+  updateStatus(checkoutCode){  
+    let payload = { status : this.order.status , checkoutCode:checkoutCode } 
     this.shoppingService.updateOrder(payload).subscribe(response => { 
      console.log("atualizou")
     
